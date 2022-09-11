@@ -8,15 +8,14 @@ const config = {
     // use_env_variable: 'development',
     APP_HOST: '0.0.0.0',
     APP_PORT: APP_PORT,
-    JWT_SECRET: 'f271e206119433acadc4f',
+    JWT_SECRET: 'f271e206119433acadc4hd',
     development: {
-        username: process.env.DB_USER || 'hzanfaztmpxhhd',
+        username: process.env.DB_USER ,,
         password:
-            process.env.DB_PASSWORD ||
-            'f271e206119433acadc4fcd08093220f28fcf4e8ca012305ddf21ce6da8fc56c',
-        database: process.env.DB_NAME || 'd59lo73ouf2h6b',
-        host: process.env.DB_HOST || 'ec2-44-208-88-195.compute-1.amazonaws.com',
-        port: process.env.DB_PORT || 5432,
+            process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        host: process.env.DB_HOST ,
+        port: process.env.DB_PORT ,
         dialect: 'postgres',
         dialectOptions: {
             ssl: {
@@ -39,8 +38,8 @@ const config = {
         host: 'smtp.gmail.com',
         port: 465,
         auth: {
-            user: 'noreply@nextinstudio.com',
-            pass: 'atfpaqjkomfxnhfa'
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PASS
         }
     }
 };
