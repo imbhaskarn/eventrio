@@ -1,0 +1,42 @@
+version: '3.3'
+
+# services
+services:
+  test_db:
+    image: postgres:latest
+    container_name: test_db
+    logging:
+        driver: journald
+    ports:
+      - 5432:5432
+    environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=1234
+        - POSTGRES_DB=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  api:
+    container_name: node_v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes: 
+      - type: bind
+        source: .
+        target: /app/
+    logging:
+      driver: journald
+    network_mode: host
+    ports:
+      - 5000:5000
+      - 9229:9229
+    depends_on:
+      test_db:
+        condition: service_healthy
+    # uncomment to start debugger
+    # command: nodemon --inspect=0.0.0.0:9229 ./server.js
+    #comment out to start debuger
+    command: npm run dev

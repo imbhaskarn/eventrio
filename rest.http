@@ -1,0 +1,197 @@
+@baseURL = http://localhost:5000/api/v1
+
+
+### Check api status with db
+GET http://localhost:5000/test_db
+Content-Type: application/json
+
+### Check api status without db
+GET localhost:5000/test_without_db
+Content-Type: application/json
+
+
+
+
+### signup or send otp to user
+POST http://localhost:5000/api/v1/auth
+Content-Type: application/json
+
+{ "mobile": "+918697841410"
+}
+
+### signup or send otp to user
+POST http://localhost:5000/api/v1/auth/user
+Content-Type: application/json
+
+{ "mobile": "+918697841410",
+  "otp": "614308"
+}
+
+### create a new account
+GET http://localhost:5000/verify
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtb2JpbGUiOiIrOTE4Njk3ODQxNDEwIiwidXNlcklEIjoxLCJpYXQiOjE2NjE3NjgwMTcsImV4cCI6MTY2MTg1NDQxN30.evQmwm7tmPKIucZPvBMyHR-kQYF5glXbt-SSDsWorxE 
+
+### signin to an existing account
+
+POST http://localhost:8080/api/signin
+Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjIyYzcwZGYzMmNmYTg2Y2UyZGZhYWE3IiwiaWF0IjoxNjQ3MDc5NjQ3LCJleHAiOjE2NDcxNjYwNDd9.m7Q9Fyg3HO_j_FaE2HovuNBHGeItCk9Btvhg-M5SXzk
+
+{
+	"username":"user",
+	"password":"password@1"
+}
+
+
+### OTP Send
+
+POST http://localhost:5000/api/v1/otp/send
+Content-Type: application/json
+
+{	"phone_number": "8697841410" }
+
+### User profile
+POST http://localhost:5000/api/v1/user/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMsImlhdCI6MTY2MjA2MTcwOCwiZXhwIjoxNjYyMTQ4MTA4fQ.a3jp3Ip-L7BPTR29PIpPAai1iabzY351IrDrFMPiiWA
+
+{
+  "name":"Shrikrushana",
+  "city":"Pune",
+  "email":"shrikrushana@9960gmail.com",
+  "gender":"male",
+  "image_url": "http://localhost:5000/test_db",
+  "dob": "11/11/11"
+}
+
+### User profile fetch
+GET http://localhost:5000/api/v1/user/profile?user_id=1
+Content-Type: application/json
+
+### User profile by id fetch
+GET http://localhost:5000/api/v1/user/profilebyid?user_id=1
+Content-Type: application/json
+
+### Sub Service create
+
+POST http://localhost:5000/api/v1/service/sub_service
+Content-Type: application/json
+
+{
+  "sub_service_image": "https://cdn.pixabay.com/photo/2016/10/26/19/00/domain-names-1772242_960_720.jpg",
+  "title": "BurgerA",
+  "price": 139.99,
+  "service_id": 1
+}
+
+### Sub Service update
+
+PUT http://localhost:5000/api/v1/service/sub_service
+Content-Type: application/json
+
+{
+  "sub_service_id": 14,
+  "title": "Burge12",
+  "price": 229.99
+}
+
+### Service fetch by id
+
+GET http://localhost:5000/api/v1/service?service_id=4
+
+### Service fetch by limit
+
+GET http://localhost:5000/api/v1/service?limit=4
+
+### Service fetch by service type
+GET http://localhost:5000/api/v1/service?service_type=Food
+
+### Service create
+
+POST http://localhost:5000/api/v1/service
+Content-Type: application/json
+
+{
+  "service_image":"imgurl",
+  "service_name":"Raja Food",
+  "service_type": "Food",
+  "about":"this service is so good",
+  "service_phone_no":"+9127109836",
+  "sub_services":[
+    {
+      "sub_services_image":"imageurl",
+      "name":"Burger_combo",
+      "price_per":300
+    },
+     {
+      "sub_services_image":"imageurl",
+      "name":"pizza_combo",
+      "price_per":400
+    }
+  ],
+  "gallaries": [
+    "imageurl1",
+    "imageurl2",
+    "imageurl3"
+  ],
+  "address": "Vimannager,Pune",
+  "location": {
+      "latitude": "1124.13242",
+      "longitude": "213.44323"
+    }
+}
+
+### package fetch by package_id
+
+GET http://localhost:5000/api/v1/package?package_id=1
+
+### package fetch by limit 
+
+GET http://localhost:5000/api/v1/package?limit=10
+
+
+
+### package create
+
+POST http://localhost:5000/api/v1/package
+Content-Type: application/json
+
+{
+  "package_image":"url",
+  "package_name":"Neha's Bithday",
+  "package_date":"20-01-2022",
+  "user_id": 1
+}
+
+
+### add service to package
+
+POST http://localhost:5000/api/v1/package/service
+Content-Type: application/json
+
+{
+  "package_id": 1,
+  "services": [{
+      "service_id": 1,
+      "total_price": 2000,
+      "total_guest": 15
+    },
+    {
+      "service_id": 3,
+      "total_price": 1900,
+      "total_guest": 150
+      }]
+}
+
+
+### create payment
+
+POST http://localhost:5000/api/v1/payment
+Content-Type: application/json
+
+ {
+  "package_id": 1,
+  "payment_request_id": "21jl123jl123j",
+  "amount": 339.99
+ }

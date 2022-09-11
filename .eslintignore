@@ -1,0 +1,9 @@
+.vscode/
+docker/
+*.yaml
+*.yml
+*.http
+*.md
+package-lock.json
+package.json
+.env

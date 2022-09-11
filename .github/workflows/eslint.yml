@@ -1,0 +1,26 @@
+name: Nodejs ESLint Workflow
+
+on:
+  push:
+    branches: [ "main", "dev_deploy" ]
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Node Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Fix
+        run: npm run format
